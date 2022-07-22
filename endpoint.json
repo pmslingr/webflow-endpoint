@@ -1,0 +1,105 @@
+{
+  "label": "Webflow",
+  "name": "webflow",
+  "apiVersion": "v1",
+  "internal": false,
+  "configurationType": "GLOBAL",
+  "deployment": {
+    "profiles": [
+      {
+        "name": "default",
+        "label": "Default",
+        "memory": 256,
+        "description": "Default configuration"
+      }
+    ],
+    "allowMultipleInstances": false
+  },
+  "status": "ACTIVE",
+  "stores": [
+    {"name": "tokens"}
+  ],
+  "events": [
+    {
+      "label": "Webhook",
+      "name": "webhook",
+      "description": "Notifications from Webflow."
+    }
+  ],
+  "functions": [
+    {
+      "label": "GET",
+      "name": "_get"
+    },
+    {
+      "label": "POST",
+      "name": "_post"
+    },
+    {
+      "label": "PUT",
+      "name": "_put"
+    },
+    {
+      "label": "PATCH",
+      "name": "_patch"
+    },
+    {
+      "label": "DELETE",
+      "name": "_delete"
+    }
+  ],
+  "scripts": [
+    "http-generic-helpers.js",
+    "webflow-helpers.js"
+  ],
+  "configuration": [
+    {
+      "name": "clientId",
+      "label": "Client ID",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "clientSecret",
+      "label": "Client Secret",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name" : "connectButton",
+      "label" : "Connect to Webflow",
+      "description": "Click button to obtain access token",
+      "type" : "button",
+      "typeOptions": {
+        "color" : "primary",
+        "icon" : "zmdi-play",
+        "action" : "var url = 'https://webflow.com/oauth/authorize?client_id=' + config.clientId + '&response_type=code';\nvar win = window.open(url, 'Authorization page', 'toolbar=no,scrollbars=no,location=no,statusbar=no,menubar=no,resizable=0,width=500,height=600,left=' + ((screen.width / 2) - 250) + ',top=' + ((screen.height / 2) - 250) + ',');\nvar self = this;\nvar intervalFn = function () {\ntry {\n    if (!win || !win.location) {\n        window.clearInterval(pollTimer);\n    } else {\n        if (win.location.href.indexOf('/callback') != -1) {\n\t\t\twin.innerWidth = 100;\n            win.innerHeight = 100;\n            win.screenX = screen.width;\n            win.screenY = screen.height;\n            window.clearInterval(pollTimer);\n            url = win.location.href;\n            var pos = url.indexOf('code=');\n            var code;\n            if(pos > -1) {\n                code = url.substring(pos + 5);\n                config.authorizationCode = code;\n                var request = {\n                    client_id: config.clientId,\n                    client_secret: config.clientSecret,\n                    code: config.authorizationCode,\n                    grant_type: 'authorization_code',\n                    redirect_uri: config.redirectUri\n                };\n                fetch('https://api.webflow.com/oauth/access_token', {\n                    method: 'POST',\n                    body: JSON.stringify(request)\n                })\n                .then(response => response.json())\n                .then(data => {\n                    config.accessToken = data.access_token;\n                    console.log('Success:', data);\n                })\n                .catch((error) => {\n                    console.error('Error:', error);\n                });\n            }\n\t\t\ttry { \n\t\t\t\twin.close();\n\t\t\t} catch (e) { }\n        }\n    }\n} catch (e) {\n    console.log(e)\n}\n};\nvar pollTimer = window.setInterval(function () { intervalFn.apply(self) }, 500);"
+      }
+    },
+    {
+      "name": "authorizationCode",
+      "label": "Authorization Code",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "accessToken",
+      "label": "Access Token",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "redirectUri",
+      "label": "Registered URI",
+      "description": "Redirect URI to register on your application",
+      "type": "label",
+      "value": "config.SERVER_URL+ '/callback'"
+    },
+    {
+      "name": "webhook",
+      "label": "Webhook URL",
+      "type": "label",
+      "value": "@config.WEBHOOK_URL"
+    }
+  ]
+}

@@ -325,6 +325,5 @@ app.endpoints.webflow.webhooks.remove(siteId, webhookId)
 
 ## Events
 
-You can set a webhooks listener with the Gmelius API methods.
+You can set a webhooks listener with the Webflow API methods.
 
-{% include links.html %}

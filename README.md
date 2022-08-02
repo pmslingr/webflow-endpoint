@@ -38,7 +38,7 @@ This value comes from the app created in the Webflow dashboard.
 
 ### Connect To Webflow
 
-This button will trigger the Oauth connection process and will fill the fields: "Authorization Code" and "Authorization Token".
+This button will trigger the Oauth connection process and will fill the fields: "Authorization Code".
 
 ### Authorization Code
 

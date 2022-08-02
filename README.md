@@ -22,7 +22,7 @@ Some features available in this endpoint are:
 
 ## Configuration
 
-In order to create a Webflow endpoint in your Slingr app first you must have a Webflow account. Go to the dashboard configuration: "integrations" and create an application filling the fields with the correct information (the redirect URI will be shown in the endpoint configuration create view and the homepage is the runtime of your app). Once you created the application you will be able to see the Client Id and Client Secret on the application details section.You should fill the endpoint fields with this. Then, you will need to go through an Oauth Authroization process with the button "Connect to Webflow", this will give the app an authorization code which is necessary to finally get the authorization token and complete all the endpoint fields. 
+In order to create a Webflow endpoint in your Slingr app first you must have a Webflow account. Go to the dashboard configuration: "integrations" and create an application filling the fields with the correct information (the redirect URI will be shown in the endpoint configuration create view and the homepage is the runtime of your app). Once you created the application you will be able to see the Client Id and Client Secret on the application details section.You should fill the endpoint fields with this. Then, you will need to go through an Oauth Authorization process with the button "Connect to Webflow", this will give the app an authorization code which is necessary to finally get the access token when the endpoint is deployed. 
 
 ### Redirect URI
 
@@ -43,10 +43,6 @@ This button will trigger the Oauth connection process and will fill the fields: 
 ### Authorization Code
 
 This is used for obtaining the Authorization Token. This field will be automatically filled when doing the Oauth connection with the "Connect to webflow" button
-
-### Authorization Token
-
-This field will be automatically filled when doing the Oauth connection with the "Connect to webflow" button.
 
 ### Webhook Url
 

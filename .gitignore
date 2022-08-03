@@ -5,3 +5,4 @@ endpoint_proxy.properties
 /bin/
 endpoint_local.properties
 src/main/resources/endpoint_proxy.properties
+src/main/java/io/slingr/endpoints/.DS_Store

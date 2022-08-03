@@ -80,7 +80,8 @@ public class TokenManager {
     public void setupToken() {
         System.out.println("SET UP TOKEN: "+ getToken());
         httpService.setupBearerAuthenticationHeader(getToken());
-        httpService.setupDefaultHeader("Accept", "application/json");
+        httpService.setupDefaultHeader("Accept-Version", "1.0.0");
+        httpService.setupDefaultHeader("Content-Type", "application/json");
     }
 
     private Json getLastToken() {

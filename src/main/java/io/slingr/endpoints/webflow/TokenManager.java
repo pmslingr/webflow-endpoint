@@ -53,8 +53,8 @@ public class TokenManager {
                     .param("client_id", this.clientId)
                     .param("client_secret", this.clientSecret)
                     .param("grant_type", "authorization_code")
-                    .param("code", this.authorizationCode)
-                    .param("redirect_uri", this.redirectUri);
+                    .param("code", this.authorizationCode);
+                    // .param("redirect_uri", this.redirectUri); if redirect_uri is sent, we get an auth error.
             Json tokenResponse = RestClient.builder(WEBFLOW_API_TOKEN_URL)
                     .header("Content-Type", "application/x-www-form-urlencoded")
                     .post(formBody);

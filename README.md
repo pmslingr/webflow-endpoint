@@ -26,7 +26,7 @@ In order to create a Webflow endpoint in your Slingr app first you must have a W
 
 ### Redirect URI
 
-This URL has to be configured in the app created in the Gmelius dashboard.
+This URL has to be configured in the app created in the Webflow dashboard.
 
 ### Client ID
 
